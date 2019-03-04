@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { Image, Dimensions, Platform, View, ActivityIndicator, StyleSheet } from 'react-native';
 import { Block, Button, Input, NavBar } from 'galio-framework';
 import theme from '../../config/theme';
-import { plantUpload } from '../../actions/upload';
 import { pickImage } from '../../actions/image';
 
 const { width, height } = Dimensions.get('screen');
@@ -41,9 +40,7 @@ class Upload extends PureComponent {
   };
 
   onUpload = () => {
-    const { plantUpload } = this.props;
     const { name, species, age } = this.state;
-    plantUpload(name, species, age);
   };
 
   render() {
@@ -109,7 +106,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  plantUpload,
   pickImage,
 };
 

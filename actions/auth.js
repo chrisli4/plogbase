@@ -10,6 +10,7 @@ import {
   SIGNUP_SUCCESS,
   SIGNUP_FAILURE,
   SYNC_USER,
+  SYNC_USER_NULL,
 } from '../constants/auth';
 
 export const login = createAction(LOGIN_REQUEST, (username, password) => ({
@@ -39,3 +40,5 @@ export const signUpFailure = createAction(SIGNUP_FAILURE);
 export const syncUser = createAction(SYNC_USER, user => ({
   user,
 }));
+
+export const syncUserNull = createAction(SYNC_USER_NULL);

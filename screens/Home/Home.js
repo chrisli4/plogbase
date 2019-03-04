@@ -1,8 +1,10 @@
 import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
 import { ScrollView, StyleSheet, Dimensions, Platform } from 'react-native';
 import { Block, Button, Card, NavBar } from 'galio-framework';
 import { LinearGradient } from 'expo';
 import theme from '../../config/theme';
+import { listenToUserFeed } from '../../actions/listener';
 
 const { width } = Dimensions.get('screen');
 

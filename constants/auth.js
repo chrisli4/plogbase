@@ -1,4 +1,5 @@
 export const SYNC_USER = 'SYNC_USER';
+export const SYNC_USER_NULL = 'SYNC_USER_NULL';
 
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';

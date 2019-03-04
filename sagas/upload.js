@@ -1,5 +1,4 @@
 import { all, call, put, select, takeLatest } from 'redux-saga/effects';
-import FirebaseHelper from '../api/firebaseHelper';
 import { PLANT_UPLOAD_REQUEST } from '../constants/upload';
 import { plantUploadSuccess, plantUploadFailure } from '../actions/upload';
 

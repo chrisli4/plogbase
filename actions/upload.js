@@ -14,8 +14,11 @@ export const plantUpload = createAction(
   })
 );
 
-export const plantUploadSuccess = createAction(PLANT_UPLOAD_SUCCESS, postKey => ({
-  postKey,
-}));
+export const plantUploadSuccess = createAction(
+  PLANT_UPLOAD_SUCCESS,
+  postKey => ({
+    postKey,
+  })
+);
 
 export const plantUploadFailure = createAction(PLANT_UPLOAD_FAILURE);

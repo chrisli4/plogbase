@@ -10,6 +10,7 @@ import {
   SIGNUP_SUCCESS,
   SIGNUP_FAILURE,
   SYNC_USER,
+  SYNC_USER_NULL,
 } from '../constants/auth';
 
 const initialState = {
@@ -81,6 +82,11 @@ export default handleActions(
     [SYNC_USER]: (state, action) => ({
       ...state,
       user: action.payload.user,
+    }),
+
+    [SYNC_USER_NULL]: state => ({
+      ...state,
+      user: null,
     }),
   },
   initialState
