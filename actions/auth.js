@@ -1,41 +1,40 @@
 import { createAction } from 'redux-actions';
-import {
-  LOGIN_REQUEST,
-  LOGIN_SUCCESS,
-  LOGIN_FAILURE,
-  LOGOUT_REQUEST,
-  LOGOUT_SUCCESS,
-  LOGOUT_FAILURE,
-  SIGNUP_REQUEST,
-  SIGNUP_SUCCESS,
-  SIGNUP_FAILURE,
-  SYNC_USER,
-} from '../constants/auth';
+import * as types from '../constants/auth';
 
-export const login = createAction(LOGIN_REQUEST, (username, password) => ({
-  username,
-  password,
+export const login = createAction(
+  types.LOGIN_REQUEST,
+  (username, password) => ({
+    username,
+    password,
+  })
+);
+
+export const loginSuccess = createAction(types.LOGIN_SUCCESS);
+
+export const loginFailure = createAction(types.LOGIN_FAILURE);
+
+export const logout = createAction(types.LOGOUT_REQUEST);
+
+export const logoutSuccess = createAction(types.LOGOUT_SUCCESS);
+
+export const logoutFailure = createAction(types.LOGOUT_FAILURE);
+
+export const signUp = createAction(
+  types.SIGNUP_REQUEST,
+  (username, password) => ({
+    username,
+    password,
+  })
+);
+
+export const signUpSuccess = createAction(types.SIGNUP_SUCCESS);
+
+export const signUpFailure = createAction(types.SIGNUP_FAILURE);
+
+export const syncUser = createAction(types.SYNC_USER, user => ({
+  user,
 }));
 
-export const loginSuccess = createAction(LOGIN_SUCCESS);
-
-export const loginFailure = createAction(LOGIN_FAILURE);
-
-export const logout = createAction(LOGOUT_REQUEST);
-
-export const logoutSuccess = createAction(LOGOUT_SUCCESS);
-
-export const logoutFailure = createAction(LOGOUT_FAILURE);
-
-export const signUp = createAction(SIGNUP_REQUEST, (username, password) => ({
-  username,
-  password,
-}));
-
-export const signUpSuccess = createAction(SIGNUP_SUCCESS);
-
-export const signUpFailure = createAction(SIGNUP_FAILURE);
-
-export const syncUser = createAction(SYNC_USER, user => ({
+export const syncUserSuccess = createAction(types.SYNC_USER_SUCCESS, user => ({
   user,
 }));
