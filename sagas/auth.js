@@ -15,7 +15,6 @@ import {
   signUpSuccess,
   signUpFailure,
   syncUser,
-  syncUserSuccess,
 } from '../actions/auth';
 
 function* loginSaga(action) {
@@ -67,7 +66,7 @@ function* syncUserSaga() {
   while (true) {
     const { user } = yield take(channel);
     if (user) {
-      yield put(syncUserSuccess(user));
+      yield put(syncUser(user));
       yield call(NavigationService.navigate, 'Drawer');
     } else {
       yield put(syncUser(null));

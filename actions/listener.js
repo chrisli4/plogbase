@@ -1,20 +1,25 @@
 import { createAction } from 'redux-actions';
-import * as types from '../constants/listener';
+import {
+  FIREBASE_LISTEN_REQUESTED,
+  FIREBASE_LISTEN_FULFILLED,
+  FIREBASE_LISTEN_REJECTED,
+  FIREBASE_LISTEN_CHILD_ADDED,
+  FIREBASE_LISTEN_REMOVED,
+  FIREBASE_REMOVE_LISTENER_REQUESTED,
+} from '../constants/listener';
 
-export const firebaseListenRequest = createAction(
-  types.FIREBASE_LISTEN_REQUEST,
+export const firebaseListenRequested = createAction(
+  FIREBASE_LISTEN_REQUESTED,
   (ref, metaType) => ({
     ref,
     metaType,
   })
 );
 
-export const firebaseListenFailure = createAction(
-  types.FIREBASE_LISTEN_FAILURE
-);
+export const firebaseListenRejected = createAction(FIREBASE_LISTEN_REJECTED);
 
-export const firebaseListenSuccess = createAction(
-  types.FIREBASE_LISTEN_SUCCESS,
+export const firebaseListenFulfilled = createAction(
+  FIREBASE_LISTEN_FULFILLED,
   (items, metaType) => ({
     items,
     metaType,
@@ -22,16 +27,16 @@ export const firebaseListenSuccess = createAction(
 );
 
 export const firebaseListenChildAdded = createAction(
-  types.FIREBASE_LISTEN_CHILD_ADDED,
-  (pid, value, metaType) => ({
-    pid,
+  FIREBASE_LISTEN_CHILD_ADDED,
+  (id, value, metaType) => ({
+    id,
     value,
     metaType,
   })
 );
 
 export const firebaseListenRemoved = createAction(
-  types.FIREBASE_LISTEN_REMOVED,
+  FIREBASE_LISTEN_REMOVED,
   (clearItems, metaType) => ({
     clearItems,
     metaType,
@@ -39,7 +44,7 @@ export const firebaseListenRemoved = createAction(
 );
 
 export const firebaseRemoveListenerRequested = createAction(
-  types.FIREBASE_REMOVE_LISTENER_REQUEST,
+  FIREBASE_REMOVE_LISTENER_REQUESTED,
   (clearItems, metaType) => ({
     clearItems,
     metaType,

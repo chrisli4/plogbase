@@ -1,9 +1,12 @@
 import { eventChannel, buffers } from 'redux-saga';
 import { put, take, call, fork, cancel, flush } from 'redux-saga/effects';
-import * as types from '../constants/listener';
 import {
-  firebaseListenSuccess,
-  firebaseListenFailure,
+  FIREBASE_LISTEN_REQUESTED,
+  FIREBASE_REMOVE_LISTENER_REQUESTED,
+} from '../constants/listener';
+import {
+  firebaseListenRejected,
+  firebaseListenFulfilled,
   firebaseListenChildAdded,
   firebaseListenRemoved,
 } from '../actions/listener';
@@ -31,9 +34,9 @@ export function* getDataAndListenToChannel(ref, metaType) {
       yield flush(chan);
       const val = snap.val();
       const value = val || {};
-      yield put(firebaseListenSuccess(value, metaType));
+      yield put(firebaseListenFulfilled(value, metaType));
     } catch (error) {
-      yield put(firebaseListenFailure(error, metaType));
+      yield put(firebaseListenRejected(error, metaType));
     }
     while (true) {
       const data = yield take(chan);
@@ -46,8 +49,8 @@ export function* getDataAndListenToChannel(ref, metaType) {
 
 export function* watchListener(metaType) {
   while (true) {
-    const listenRequestAction = yield take(types.FIREBASE_LISTEN_REQUEST);
-    if (listenRequestAction.type === metaType) {
+    const listenRequestAction = yield take(FIREBASE_LISTEN_REQUESTED);
+    if (listenRequestAction.payload.metaType === metaType) {
       let task = yield fork(
         getDataAndListenToChannel,
         listenRequestAction.payload.ref,
@@ -55,17 +58,17 @@ export function* watchListener(metaType) {
       );
       while (true) {
         const action = yield take([
-          types.FIREBASE_REMOVE_LISTENER_REQUESTED,
-          types.FIREBASE_LISTEN_REQUESTED,
+          FIREBASE_REMOVE_LISTENER_REQUESTED,
+          FIREBASE_LISTEN_REQUESTED,
         ]);
 
-        if (action.type === metaType) {
+        if (action.payload.metaType === metaType) {
           yield cancel(task);
           yield put(
             firebaseListenRemoved(!!action.payload.clearItems, metaType)
           );
 
-          if (action.type === types.FIREBASE_LISTEN_REQUEST) {
+          if (action.type === FIREBASE_LISTEN_REQUESTED) {
             task = yield fork(
               getDataAndListenToChannel,
               action.payload.ref,

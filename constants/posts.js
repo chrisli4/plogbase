@@ -1,3 +1,7 @@
+export const POST_SYNC = 'POST_SYNC';
+export const POST_USER_SYNC = 'POST_USER_SYNC';
+export const POST_FOLLOW_SYNC = 'POST_FOLLOW_SYNC';
+
 export const POST_ADD_REQUEST = 'POST_ADD_REQUEST';
 export const POST_ADD_SUCCESS = 'POST_ADD_SUCCESS';
 export const POST_ADD_FAILURE = 'POST_ADD_FAILURE';

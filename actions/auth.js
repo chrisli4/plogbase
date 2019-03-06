@@ -34,7 +34,3 @@ export const signUpFailure = createAction(types.SIGNUP_FAILURE);
 export const syncUser = createAction(types.SYNC_USER, user => ({
   user,
 }));
-
-export const syncUserSuccess = createAction(types.SYNC_USER_SUCCESS, user => ({
-  user,
-}));

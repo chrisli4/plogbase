@@ -1,11 +1,9 @@
 import { Firebase } from '../lib/firebase';
-import { firebaseListenRequested, firebaseRemoveListenerRequested } from './listener';
+import { firebaseListenRequested } from './listener';
 
-export function listenToUserPosts(uid) {
-  const ref = Firebase.database().ref(`people/${uid}`);
+export function subscribeToUserPosts(uid) {
+  const ref = Firebase.database()
+    .ref(`people/${uid}/posts`)
+    .limitToLast(5);
   return firebaseListenRequested(ref, 'people');
-};
-
-export function removeUserPostsListenerRequested() {
-  return firebaseRemoveListenerRequested(false, 'people');
-};
+}

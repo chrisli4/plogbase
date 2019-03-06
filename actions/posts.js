@@ -1,6 +1,18 @@
 import { createAction } from 'redux-actions';
 import * as types from '../constants/posts';
 
+export const syncPosts = createAction(types.POST_SYNC, posts => ({
+  posts,
+}));
+
+export const syncUserPosts = createAction(types.POST_USER_SYNC, posts => ({
+  posts,
+}));
+
+export const syncFollowPosts = createAction(types.POST_FOLLOW_SYNC, posts =>({
+  posts,
+}));
+
 export const addPost = createAction(types.POST_ADD_REQUEST, (uid, post) => ({
   uid,
   post,
