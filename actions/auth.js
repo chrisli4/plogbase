@@ -1,40 +1,40 @@
 import { createAction } from 'redux-actions';
 import {
-  LOGIN_REQUEST,
-  LOGIN_SUCCESS,
-  LOGIN_FAILURE,
-  LOGOUT_REQUEST,
-  LOGOUT_SUCCESS,
-  LOGOUT_FAILURE,
-  SIGNUP_REQUEST,
-  SIGNUP_SUCCESS,
-  SIGNUP_FAILURE,
+  LOGIN_REQUESTED,
+  LOGIN_FULFILLED,
+  LOGIN_REJECTED,
+  LOGOUT_REQUESTED,
+  LOGOUT_FULFILLED,
+  LOGOUT_REJECTED,
+  SIGNUP_REQUESTED,
+  SIGNUP_FULFILLED,
+  SIGNUP_REJECTED,
   SYNC_USER,
 } from '../constants/auth';
 
-export const login = createAction(LOGIN_REQUEST, (username, password) => ({
+export const login = createAction(LOGIN_REQUESTED, (username, password) => ({
   username,
   password,
 }));
 
-export const loginSuccess = createAction(LOGIN_SUCCESS);
+export const loginFulfilled = createAction(LOGIN_FULFILLED);
 
-export const loginFailure = createAction(LOGIN_FAILURE);
+export const loginRejected = createAction(LOGIN_REJECTED);
 
-export const logout = createAction(LOGOUT_REQUEST);
+export const logout = createAction(LOGOUT_REQUESTED);
 
-export const logoutSuccess = createAction(LOGOUT_SUCCESS);
+export const logoutFulfilled = createAction(LOGOUT_FULFILLED);
 
-export const logoutFailure = createAction(LOGOUT_FAILURE);
+export const logoutRejected = createAction(LOGOUT_REJECTED);
 
-export const signUp = createAction(SIGNUP_REQUEST, (username, password) => ({
+export const signUp = createAction(SIGNUP_REQUESTED, (username, password) => ({
   username,
   password,
 }));
 
-export const signUpSuccess = createAction(SIGNUP_SUCCESS);
+export const signUpFulfilled = createAction(SIGNUP_FULFILLED);
 
-export const signUpFailure = createAction(SIGNUP_FAILURE);
+export const signUpRejected = createAction(SIGNUP_REJECTED);
 
 export const syncUser = createAction(SYNC_USER, user => ({
   user,

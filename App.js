@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
 export default class App extends React.Component {
   constructor(props) {
     super(props);
-    const { store, persistor } = configureStore();
+    const { store, persistor } = configureStore;
     this.state = {
       store,
       persistor,

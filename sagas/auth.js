@@ -3,17 +3,17 @@ import { eventChannel } from 'redux-saga';
 import { Firebase } from '../lib/firebase';
 import NavigationService from '../navigation/NavigationService';
 import {
-  LOGIN_REQUEST,
-  LOGOUT_REQUEST,
-  SIGNUP_REQUEST,
+  LOGIN_REQUESTED,
+  LOGOUT_REQUESTED,
+  SIGNUP_REQUESTED,
 } from '../constants/auth';
 import {
-  loginSuccess,
-  loginFailure,
-  logoutSuccess,
-  logoutFailure,
-  signUpSuccess,
-  signUpFailure,
+  loginFulfilled,
+  loginRejected,
+  logoutFulfilled,
+  logoutRejected,
+  signUpFulfilled,
+  signUpRejected,
   syncUser,
 } from '../actions/auth';
 
@@ -22,9 +22,9 @@ function* loginSaga(action) {
     const { username, password } = action.payload;
     const auth = Firebase.auth();
     yield call([auth, auth.signInWithEmailAndPassword], username, password);
-    yield put(loginSuccess());
+    yield put(loginFulfilled());
   } catch (error) {
-    yield put(loginFailure(error));
+    yield put(loginRejected(error));
   }
 }
 
@@ -33,10 +33,10 @@ function* signUpSaga(action) {
     const { username, password } = action.payload;
     const auth = Firebase.auth();
     yield call([auth, auth.createUserWithEmailAndPassword], username, password);
-    yield put(signUpSuccess());
+    yield put(signUpFulfilled());
     yield call(NavigationService.navigate, 'Auth');
   } catch (error) {
-    yield put(signUpFailure(error));
+    yield put(signUpRejected(error));
   }
 }
 
@@ -44,9 +44,9 @@ function* logoutSaga() {
   try {
     const auth = Firebase.auth();
     yield call([auth, auth.signOut]);
-    yield put(logoutSuccess());
+    yield put(logoutFulfilled());
   } catch (error) {
-    yield put(logoutFailure(error));
+    yield put(logoutRejected(error));
   }
 }
 
@@ -78,8 +78,8 @@ function* syncUserSaga() {
 export default function* authRoot() {
   yield all([
     fork(syncUserSaga),
-    takeEvery(LOGIN_REQUEST, loginSaga),
-    takeEvery(LOGOUT_REQUEST, logoutSaga),
-    takeEvery(SIGNUP_REQUEST, signUpSaga),
+    takeEvery(LOGIN_REQUESTED, loginSaga),
+    takeEvery(LOGOUT_REQUESTED, logoutSaga),
+    takeEvery(SIGNUP_REQUESTED, signUpSaga),
   ]);
 }
