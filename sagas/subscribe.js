@@ -13,5 +13,7 @@ function* subscribeToFeeds(action) {
 }
 
 export default function* postRoot() {
-  yield all([takeEvery(SYNC_USER, subscribeToFeeds)]);
+  yield all([
+    takeEvery(SYNC_USER, subscribeToFeeds),
+  ]);
 }

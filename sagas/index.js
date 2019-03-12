@@ -1,6 +1,6 @@
 import { all } from 'redux-saga/effects';
 import authSaga from './auth';
-import fetchSaga from './fetch';
+import fetchSaga from './posts';
 import subscribeSaga from './subscribe';
 import { watchListener } from './listener';
 import { watchRemoveRequested } from './remove';

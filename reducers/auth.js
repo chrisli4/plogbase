@@ -1,14 +1,14 @@
 import { handleActions } from 'redux-actions';
 import {
-  LOGIN_REQUEST,
-  LOGIN_SUCCESS,
-  LOGIN_FAILURE,
-  LOGOUT_REQUEST,
-  LOGOUT_SUCCESS,
-  LOGOUT_FAILURE,
-  SIGNUP_REQUEST,
-  SIGNUP_SUCCESS,
-  SIGNUP_FAILURE,
+  LOGIN_REQUESTED,
+  LOGIN_FULFILLED,
+  LOGIN_REJECTED,
+  LOGOUT_REQUESTED,
+  LOGOUT_FULFILLED,
+  LOGOUT_REJECTED,
+  SIGNUP_REQUESTED,
+  SIGNUP_FULFILLED,
+  SIGNUP_REJECTED,
   SYNC_USER,
 } from '../constants/auth';
 
@@ -23,19 +23,19 @@ const initialState = {
 
 export default handleActions(
   {
-    [LOGIN_REQUEST]: state => ({
+    [LOGIN_REQUESTED]: state => ({
       ...state,
       isFetching: true,
     }),
 
-    [LOGIN_SUCCESS]: state => ({
+    [LOGIN_FULFILLED]: state => ({
       ...state,
       isFetching: false,
       loggedIn: true,
       errorMessage: '',
     }),
 
-    [LOGIN_FAILURE]: (state, action) => ({
+    [LOGIN_REJECTED]: (state, action) => ({
       ...state,
       isFetching: false,
       loggedIn: false,
@@ -43,16 +43,16 @@ export default handleActions(
       errorMessage: action.payload.message,
     }),
 
-    [LOGOUT_REQUEST]: state => ({
+    [LOGOUT_REQUESTED]: state => ({
       ...state,
       isFetching: true,
     }),
 
-    [LOGOUT_SUCCESS]: () => ({
+    [LOGOUT_FULFILLED]: () => ({
       ...initialState,
     }),
 
-    [LOGOUT_FAILURE]: (state, action) => ({
+    [LOGOUT_REJECTED]: (state, action) => ({
       ...state,
       isFetching: false,
       loggedIn: true,
@@ -60,17 +60,17 @@ export default handleActions(
       errorMessage: action.payload.message,
     }),
 
-    [SIGNUP_REQUEST]: state => ({
+    [SIGNUP_REQUESTED]: state => ({
       ...state,
       isFetching: true,
     }),
 
-    [SIGNUP_SUCCESS]: () => ({
+    [SIGNUP_FULFILLED]: () => ({
       ...initialState,
       signUpSuccess: true,
     }),
 
-    [SIGNUP_FAILURE]: (state, action) => ({
+    [SIGNUP_REJECTED]: (state, action) => ({
       ...state,
       isFetching: false,
       loggedIn: false,

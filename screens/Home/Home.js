@@ -1,14 +1,29 @@
 import React, { PureComponent } from 'react';
-import { View, Text } from 'react-native';
+import { connect } from 'react-redux';
+import { Button, View, Text } from 'react-native';
+import { fetchPosts } from '../../actions/posts';
 
 class Home extends PureComponent {
+  onFetchPosts = () => {
+    const { fetchPosts } = this.props;
+    fetchPosts();
+  };
+
   render() {
     return (
-      <View>
+      <View style={{ alignItems: 'center', justifyContent: 'center' }}>
         <Text>Home</Text>
+        <Button title="fetch" onPress={this.onFetchPosts} />
       </View>
-     )
+    );
   }
 }
 
-export default Home;
+const mapDispatchToProps = {
+  fetchPosts,
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(Home);

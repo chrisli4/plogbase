@@ -1,7 +1,10 @@
 import { put, take, call, fork } from 'redux-saga/effects';
 import { Firebase } from '../lib/firebase';
 import { FIREBASE_REMOVE_REQUESTED } from '../constants/remove';
-import { firebaseRemoveFulfilled, firebaseRemoveRejected } from '../actions/remove';
+import {
+  firebaseRemoveFulfilled,
+  firebaseRemoveRejected,
+} from '../actions/remove';
 
 const getPostsPath = postId => ({
   [`posts/${postId}`]: null,
