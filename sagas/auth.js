@@ -2,6 +2,7 @@ import { all, call, fork, put, take, takeEvery } from 'redux-saga/effects';
 import { eventChannel } from 'redux-saga';
 import { Firebase } from '../lib/firebase';
 import NavigationService from '../navigation/NavigationService';
+import { POSTS } from '../constants/types';
 import {
   LOGIN_REQUEST,
   LOGOUT_REQUEST,
@@ -16,6 +17,7 @@ import {
   signUpFailure,
   syncUser,
 } from '../actions/auth';
+import { fetchPosts } from '../actions/posts';
 
 function* loginSaga(action) {
   try {
@@ -67,6 +69,7 @@ function* syncUserSaga() {
     const { user } = yield take(channel);
     if (user) {
       yield put(syncUser(user));
+      yield put(fetchPosts('/posts', null, POSTS));
       yield call(NavigationService.navigate, 'Drawer');
     } else {
       yield put(syncUser(null));
