@@ -6,23 +6,27 @@ import {
 } from '../constants/posts';
 
 const initialState = {
-  posts: [],
-  homePosts: [],
-  followPosts: [],
+  POSTS: [],
+  PEOPLE: [],
+  error: null,
 };
 
 export default handleActions(
   {
     [POSTS_FETCH_SUCCESS]: (state, action) => ({
       ...state,
-      posts: [...state.posts, ...action.payload.posts],
+      [action.payload.metaType]: [
+        ...state[action.payload.metaType],
+        ...action.payload.posts,
+      ],
     }),
-    [POSTS_CLEAR]: () => ({
-      posts: [],
+    [POSTS_CLEAR]: (state, action) => ({
+      ...state,
+      [action.payload.metaType]: [],
     }),
     [POSTS_FETCH_FAILURE]: (state, action) => ({
       ...state,
-      error: action.error,
+      error: action.payload.error,
     }),
   },
   initialState

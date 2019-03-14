@@ -1,10 +1,9 @@
 import { handleActions } from 'redux-actions';
-import {
-  CURSOR_SET,
-} from '../constants/cursors';
+import { CURSOR_SET } from '../constants/cursors';
 
 const initialState = {
   POSTS: null,
+  PEOPLE: null,
 };
 
 export default handleActions(

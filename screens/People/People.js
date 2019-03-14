@@ -1,13 +1,13 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { Button, View, Text } from 'react-native';
-import { POSTS } from '../../constants/types';
+import { PEOPLE } from '../../constants/types';
 import { fetchPosts } from '../../actions/posts';
 
-class Home extends PureComponent {
+class People extends PureComponent {
   onFetch = () => {
-    const { fetchPosts, postsKey } = this.props;
-    fetchPosts('/posts', postsKey, POSTS);
+    const { fetchPosts, peopleKey, uid } = this.props;
+    fetchPosts(`/people/${uid}/posts`, peopleKey, PEOPLE);
   };
 
   render() {
@@ -34,8 +34,9 @@ class Home extends PureComponent {
 }
 
 const mapStateToProps = state => ({
-  posts: state.posts.POSTS,
-  postsKey: state.cursors.POSTS,
+  uid: state.auth.user.uid,
+  posts: state.posts.PEOPLE,
+  peopleKey: state.cursors.PEOPLE,
 });
 
 const mapDispatchToProps = {
@@ -45,4 +46,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Home);
+)(People);

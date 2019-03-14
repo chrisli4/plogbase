@@ -1,9 +1,11 @@
 import auth from './auth';
 import cursors from './cursors';
-import post from './posts';
+import posts from './posts';
+import image from './image';
 
 export default {
   auth,
   cursors,
-  post,
+  posts,
+  image,
 };

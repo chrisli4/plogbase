@@ -6,9 +6,6 @@ class FirebaseHelper {
     this.database = Firebase.database();
     this.storage = Firebase.storage();
     this.auth = Firebase.auth();
-
-    // Firebase references that are listened to.
-    this.firebaseRefs = [];
   }
 }
 

@@ -3,6 +3,9 @@ import {
   POSTS_FETCH_REQUEST,
   POSTS_FETCH_SUCCESS,
   POSTS_FETCH_FAILURE,
+  POST_ADD_REQUEST,
+  POST_ADD_SUCCESS,
+  POST_ADD_FAILURE,
   POSTS_CLEAR,
 } from '../constants/posts';
 
@@ -30,6 +33,18 @@ export const fetchPostsFailure = createAction(
     metaType,
   })
 );
+
+export const addPost = createAction(POST_ADD_REQUEST, post => ({
+  post,
+}));
+
+export const addPostSuccess = createAction(POST_ADD_SUCCESS, postId => ({
+  postId,
+}));
+
+export const addPostFailure = createAction(POST_ADD_FAILURE, error => ({
+  error,
+}));
 
 export const clearPosts = createAction(POSTS_CLEAR, metaType => ({
   metaType,
