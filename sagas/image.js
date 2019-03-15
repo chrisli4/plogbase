@@ -1,7 +1,6 @@
 import { all, call, put, takeLatest } from 'redux-saga/effects';
 import { ImagePicker, Permissions } from 'expo';
 import { IMAGE_PICK_REQUEST } from '../constants/image';
-
 import { pickImageSuccess, pickImageFailure } from '../actions/image';
 
 function* permissionSaga() {
