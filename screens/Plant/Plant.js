@@ -7,40 +7,23 @@ import { fetchPosts } from '../../actions/posts';
 
 const preview = { uri: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" };
 
-class Home extends PureComponent {
+class Plant extends PureComponent {
   onFetch = () => {
     const { fetchPosts, postsKey } = this.props;
     fetchPosts('/posts', postsKey, POSTS, false);
   };
-
-  onNav = post => {
-    const { navigation } = this.props;
-    navigation.navigate('Plant', { post });
-  }
-
+  
   render() {
-    const { posts } = this.props;
+    const { navigation } = this.props;
+    const post = navigation.getParam('post');
     return (
-      <ScrollView>
-        {posts.map(post => (
-          <View
-            key={`${post.id}`}
-            style={{ padding: 1, margin: 1, borderWidth: 1 }}
-          >
-            <Image style={{ height: 200, width: 300 }} {...{preview, uri: post.uri}} />
-            <Text>
-              {post.id}
-              {post.name}
-            </Text>
-        <Button title="nav" onPress={() => this.onNav(post)}>
-          <Text>NAV</Text>
-        </Button>
-          </View>
-        ))}
-        <Button title="fetch" onPress={this.onFetch}>
-          <Text>FETCH</Text>
-        </Button>
-      </ScrollView>
+      <View>
+        <Image style={{ height: 200, width: 300 }} {...{preview, uri: post.uri}} />
+        <Text>{post.id}</Text>
+        <Text>{post.name}</Text>
+        <Text>{post.species}</Text>
+        <Text>{post.genus}</Text>
+      </View>
     );
   }
 }
@@ -57,4 +40,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Home);
+)(Plant);

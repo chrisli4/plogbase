@@ -6,15 +6,19 @@ import {
   POST_ADD_REQUEST,
   POST_ADD_SUCCESS,
   POST_ADD_FAILURE,
+  POST_DELETE_REQUEST,
+  POST_DELETE_SUCCESS,
+  POST_DELETE_FAILURE,
   POSTS_CLEAR,
 } from '../constants/posts';
 
 export const fetchPosts = createAction(
   POSTS_FETCH_REQUEST,
-  (uri, cursor, metaType) => ({
+  (uri, cursor, metaType, fetchPostDetails) => ({
     uri,
     cursor,
     metaType,
+    fetchPostDetails,
   })
 );
 
@@ -43,6 +47,18 @@ export const addPostSuccess = createAction(POST_ADD_SUCCESS, postId => ({
 }));
 
 export const addPostFailure = createAction(POST_ADD_FAILURE, error => ({
+  error,
+}));
+
+export const deletePost = createAction(POST_DELETE_REQUEST, postId => ({
+  postId,
+}));
+
+export const deletePostSuccess = createAction(POST_DELETE_SUCCESS, postId => ({
+  postId,
+}));
+
+export const deletePostFailure = createAction(POST_DELETE_FAILURE, error => ({
   error,
 }));
 

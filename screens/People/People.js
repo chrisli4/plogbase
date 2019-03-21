@@ -7,7 +7,7 @@ import { fetchPosts } from '../../actions/posts';
 class People extends PureComponent {
   onFetch = () => {
     const { fetchPosts, peopleKey, uid } = this.props;
-    fetchPosts(`/people/${uid}/posts`, peopleKey, PEOPLE);
+    fetchPosts(`/people/${uid}/posts`, peopleKey, PEOPLE, true);
   };
 
   render() {

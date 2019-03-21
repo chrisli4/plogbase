@@ -9,7 +9,7 @@ import {
 import { setCursor } from '../actions/cursors';
 
 function* getPaginatedFeed(action) {
-  const { uri, cursor, metaType } = action.payload;
+  const { uri, cursor, metaType, fetchPostDetails } = action.payload;
   if (!cursor) yield put(clearPosts(metaType));
   try {
     const posts = yield call(
@@ -17,7 +17,7 @@ function* getPaginatedFeed(action) {
       uri,
       Firebase.POSTS_PAGE_SIZE,
       cursor,
-      false
+      fetchPostDetails
     );
     let ids = Object.keys(posts)
       .sort()

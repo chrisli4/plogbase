@@ -10,7 +10,9 @@ export default handleActions(
   {
     [IMAGE_PICK_SUCCESS]: (state, action) => ({
       ...state,
-      result: action.payload.image,
+      result: {
+        ...action.payload.image,
+      },
     }),
     [IMAGE_PICK_FAILURE]: (state, action) => ({
       ...state,

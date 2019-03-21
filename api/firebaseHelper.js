@@ -21,7 +21,6 @@ class FirebaseHelper {
         resolve(xhr.response);
       };
       xhr.onerror = function(e) {
-        console.log(e);
         reject(new TypeError('Network request failed'));
       };
       xhr.responseType = 'blob';
@@ -166,10 +165,14 @@ class FirebaseHelper {
   }
 
   /**
-   * Deletes the given postId entry from the user's home feed.
+   * Deletes the given post from the global post feed and the user's post feed. Also deletes
+   * comments, likes and the file on Cloud Storage.
    */
-  deleteFromFeed(uri, postId) {
-    return this.database.ref(`${uri}/${postId}`).remove();
+  deletePost(postId) {
+    const updates = {};
+    updates[`/posts/${postId}`] = null;
+    updates[`/people/${this.auth.currentUser.uid}/posts/${postId}`] = null;
+    return this.database.ref().update(updates);
   }
 
   /**

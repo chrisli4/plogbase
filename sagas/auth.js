@@ -69,7 +69,7 @@ function* syncUserSaga() {
     const { user } = yield take(channel);
     if (user) {
       yield put(syncUser(user));
-      yield put(fetchPosts('/posts', null, 'PEOPLE'));
+      yield put(fetchPosts('/posts', null, 'POSTS', false));
       yield call(NavigationService.navigate, 'Tab');
     } else {
       yield put(syncUser(null));
